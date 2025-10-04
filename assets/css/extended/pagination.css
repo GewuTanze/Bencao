@@ -1,0 +1,231 @@
+/* 页脚容器 - 确保全宽居中显示 */
+.page-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* 分页容器样式 - 占据整个屏幕宽度 */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px 0;
+    gap: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* 布局区域样式 */
+.pagination-left,
+.pagination-right {
+    display: flex;
+    min-width: 100px;
+}
+
+.pagination-left {
+    justify-content: flex-start;
+}
+
+.pagination-right {
+    justify-content: flex-end;
+}
+
+/* 中间页码区域 */
+.pagination-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* 占位元素样式 */
+.pagination-placeholder,
+.pagination-placeholder-mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+}
+
+.pagination-placeholder {
+    height: 36px;
+}
+
+.pagination-placeholder-mobile {
+    height: 32px;
+}
+
+/* 通用按钮样式 - 基础样式统一设置 */
+.pagination-center a.page-number,
+.pagination-center span.page-number,
+.pagination .prev,
+.pagination .next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 18px;
+    font-size: 13px;
+    color: var(--theme);
+    background: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border: none;
+    box-shadow: none;
+    position: static;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 导航按钮特殊样式 */
+.pagination .prev,
+.pagination .next {
+    min-width: auto;
+    padding: 0 16px;
+}
+
+/* 当前页码样式 */
+.pagination-center .page-number.current {
+    background: var(--accent);
+    color: var(--dark);
+    font-weight: bold;
+}
+
+/* 按钮悬停效果 */
+.pagination-center a.page-number:hover:not(.current),
+.pagination .prev:hover,
+.pagination .next:hover {
+    background: var(--accent);
+    color: var(--dark);
+    transform: translateY(-1px);
+}
+
+/* 省略号样式 */
+.pagination-center span.page-number {
+    font-size: 16px;
+    cursor: default;
+}
+
+/* 小屏幕：导航按钮容器 - 默认隐藏 */
+.pagination-nav-container-mobile {
+    display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    /* 隐藏大屏幕元素，显示小屏幕专用容器 */
+    .pagination-left,
+    .pagination-right,
+    .pagination-placeholder {
+        display: none;
+    }
+    
+    /* 小屏幕导航容器 */
+    .pagination-nav-container-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 10px;
+    }
+    
+    /* 小屏幕导航按钮区域 */
+    .pagination-left-mobile,
+    .pagination-right-mobile {
+        display: flex;
+        min-width: 100px;
+    }
+    
+    .pagination-left-mobile {
+        justify-content: flex-start;
+    }
+    
+    .pagination-right-mobile {
+        justify-content: flex-end;
+    }
+    
+    /* 小屏幕分页容器调整 */
+    .pagination {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 0 10px;
+    }
+    
+    /* 小屏幕按钮尺寸调整 */
+    .pagination-center a.page-number,
+    .pagination-center span.page-number,
+    .pagination .prev,
+    .pagination .next {
+        height: 32px;
+        font-size: 12px;
+    }
+    
+    .pagination-center a.page-number,
+    .pagination-center span.page-number {
+        min-width: 32px;
+        padding: 0 8px;
+        border-radius: 16px;
+    }
+    
+    .pagination .prev,
+    .pagination .next {
+        padding: 0 12px;
+        border-radius: 16px;
+    }
+    
+    /* 小屏幕页码间距调整 */
+    .pagination-center {
+        gap: 6px;
+        margin-top: 5px;
+    }
+    
+    /* 小屏幕：首尾页按钮居中处理 */
+    .pagination-nav-container-mobile:has(.pagination-left-mobile .pagination-placeholder-mobile),
+    .pagination-nav-container-mobile:has(.pagination-right-mobile .pagination-placeholder-mobile) {
+        justify-content: center;
+    }
+}
+
+/* 全局保障：清除所有分页相关元素的边框和阴影 */
+.pagination,
+.pagination *, 
+.page-footer,
+.page-footer * {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+
+.pagination *::after,
+.pagination *::before,
+.page-footer *::after,
+.page-footer *::before {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+
+/* 链接状态覆盖 */
+.pagination a:link,
+.pagination a:visited,
+.pagination a:hover,
+.pagination a:active,
+.pagination a:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}

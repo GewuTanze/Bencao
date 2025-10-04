@@ -1,0 +1,81 @@
+# 语言控制组件 
+zh:
+  languageCode: zh # 语言 en-us
+  languageName: "简" # 展示的语言名
+  contentDir: content/zh # 配合defaultContentLanguageInSubdir，实现多语言 即中文内容目录 英文文章放在 content/en/posts/，中文文章放在 content/zh/posts/
+  weight: 1 # 权重
+  taxonomies: # 分类系统
+       category: categories # 分类
+       tag: tags # 标签
+       series: series
+
+  params:
+    env: production  # 设置网站运行环境为生产模式，启用谷歌分析、OpenGraph、Twitter卡片和结构化数据等功能
+    description: "中药学笔记站点" # 网站描述信息，用于搜索引擎结果和社交媒体分享时的预览文本
+    #author: GewuTanze # 笔记头部作者姓名
+    defaultTheme: light # 默认是亮色背景
+    ShowShareButtons: false # 分享的按钮
+    ShowReadingTime: false # 展示预估的阅读时长
+    displayFullLangName: true # 展示全名 控制语言切换器显示的语言名称格式
+    ShowPostNavLinks: false # 展示文章导航链接，就是下一页上一页的那个
+    ShowBreadCrumbs: true # 是否展示标题上方的面包屑
+    ShowCodeCopyButtons: true # 是否展示复制代码的按钮
+    ShowRssButtonInSectionTermList: false # RSS 相关
+    ShowAllPagesInArchive: true # 在归档页面展示所有的页面
+    ShowPageNums: true # 展示页面的页数
+    ShowToc: true # 显示目录
+    TocOpen: true # 自动展开目录
+    comments: false # 评论
+    images: ["https://i.postimg.cc/7hwBy7VS/calcr.png"] # 缺省的图片，比如，博客的封面
+    DateFormat: "2006-01-02" # 这个时间是作者自己写的，只能这样写，日期格式
+    assets:          # 设置网站的标签页的图标，即 favicon
+      favicon: "favicon.png"
+      favicon16x16: "favicon.png"
+      favicon32x32: "favicon.png"
+      apple_touch_icon: "favicon.png"
+      safari_pinned_tab: "favicon.png"
+
+     
+    profileMode:     # 主页样式
+      enabled: true
+      title: 格物致知，探赜索隐
+
+zh-tw:
+  languageCode: zh-tw # 语言
+  languageName: "繁" # 展示的语言名
+  contentDir: content/zh-tw # 配合defaultContentLanguageInSubdir，实现多语言 即中文内容目录 英文文章放在 content/en/posts/，中文文章放在 content/zh/posts/
+  weight: 2 # 权重
+  taxonomies: # 分类系统
+       category: categories # 分类
+       tag: tags # 标签
+       series: series
+
+  params:
+    env: production # 设置网站运行环境为生产模式，启用谷歌分析、OpenGraph、Twitter卡片和结构化数据等功能
+    description: "中藥學筆記站點"  # 网站描述信息，用于搜索引擎结果和社交媒体分享时的预览文本
+    author: GewuTanze # 笔记头部作者姓名
+    defaultTheme: light # 默认是亮色背景
+    ShowShareButtons: false # 关闭分享的按钮
+    ShowReadingTime: false # 展示预估的阅读时长
+    displayFullLangName: true # 展示全名  控制语言切换器显示的语言名称格式
+    ShowPostNavLinks: false # 展示文章导航链接，就是下一页上一页的那个
+    ShowBreadCrumbs: true # 是否展示标题上方的面包屑
+    ShowCodeCopyButtons: true # 是否展示复制代码的按钮
+    ShowRssButtonInSectionTermList: false # RSS 相关
+    ShowAllPagesInArchive: true # 在归档页面展示所有的页面
+    ShowPageNums: true # 展示页面的页数
+    ShowToc: true # 显示目录
+    TocOpen: true # 自动展开目录
+    comments: false # 评论
+    images: ["https://i.postimg.cc/7hwBy7VS/calcr.png"] # 缺省的图片，比如，博客的封面
+    DateFormat: "2006-01-02" # 这个时间是作者自己写的，只能这样写
+    assets:          # 设置网站的标签页的图标，即 favicon
+      favicon: "favicon.png"
+      favicon16x16: "favicon.png"
+      favicon32x32: "favicon.png"
+      apple_touch_icon: "favicon.png"
+      safari_pinned_tab: "favicon.png"
+
+    profileMode:  # 主页样式
+      enabled: true
+      title: 格物致知,探賾索隱

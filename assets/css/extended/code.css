@@ -1,0 +1,57 @@
+/* 针对代码块容器的滚动条样式 - 强制暗色 */
+.post-content .highlight {
+  max-height: 20em;
+  overflow: auto;
+  display: block;
+  padding-right: 8px;
+  /* 确保滚动条样式不受父元素影响 */
+  scrollbar-color: #666 #2d2d2d; /* 滑块颜色 轨道颜色 - 标准属性 */
+}
+
+/* WebKit浏览器 (Chrome, Safari, Edge) */
+.post-content .highlight::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.post-content .highlight::-webkit-scrollbar-track {
+  background: #2d2d2d !important; /* 强制深色轨道 */
+  border-radius: 4px;
+}
+
+.post-content .highlight::-webkit-scrollbar-thumb {
+  background: #666 !important; /* 强制深色滑块 */
+  border-radius: 4px;
+  border: none !important;
+}
+
+.post-content .highlight::-webkit-scrollbar-thumb:hover {
+  background: #888 !important; /* 悬停时稍亮 */
+}
+
+.post-content .highlight::-webkit-scrollbar-corner {
+  background: #2d2d2d !important;
+}
+
+/* 确保行号区域样式正确 */
+.post-content .highlight .linenos {
+  background-color: #f5f5f5; /* 亮色背景下行号区域 */
+  color: #666; /* 行号文字颜色 */
+  padding-right: 1em;
+  text-align: right;
+  user-select: none;
+}
+
+/* 暗色模式下行号区域调整（如果需要） */
+@media (prefers-color-scheme: dark) {
+  .post-content .highlight .linenos {
+    background-color: #1e1e1e;
+    color: #aaa;
+  }
+}
+
+/* 移除代码区域原有滚动设置 */
+.post-content pre code {
+  max-height: none !important;
+  overflow: visible !important;
+}

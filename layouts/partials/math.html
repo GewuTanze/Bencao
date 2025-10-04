@@ -1,0 +1,30 @@
+  {{ $style := resources.Get "js/katex.min.css" | toCSS | minify | fingerprint }}
+  {{ $katexjs := resources.Get "js/katex.min.js" }}
+  {{ $autorender := resources.Get "js/auto-render.min.js" }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}">
+  <script defer src="{{ $katexjs.Permalink }}"></script>
+  <script defer src="{{ $autorender.Permalink }}"></script>
+  <style>
+  	.katex-display { overflow: auto hidden }
+      .katex-display > .katex > .katex-html > .tag { 
+          position: static;
+          float: right;
+      }
+      .katex { font-size: 1em; }
+  </style>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+            // customised options
+            // • auto-render specific keys, e.g.:
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ],
+            // • rendering keys, e.g.:
+            throwOnError : false
+          });
+      });
+  </script>

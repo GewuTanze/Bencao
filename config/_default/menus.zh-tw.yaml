@@ -1,0 +1,37 @@
+main:
+        - identifier: home
+          name: 首頁
+          url: zh-tw/
+          weight: 2 # 控制在页面上展示的前后顺序
+
+        - identifier: archives
+          name: 歸檔
+          url: zh-tw/archives/
+          weight: 5
+
+        - identifier: categories
+          name: 分類
+          url: zh-tw/categories/
+          weight: 10
+
+        - identifier: tags
+          name: 標簽
+          url: zh-tw/tags/
+          weight: 10
+
+        - identifier: notes
+          name: 筆記
+          url: zh-tw/note/   #可在content文件夹下添加 zh-cn文件夹
+          weight: 15
+
+        - identifier: search
+          name: 搜索
+          url: zh-tw/search/
+          weight: 20
+
+        - identifier: about
+          name: 關於
+          url: zh-tw/about/
+          weight: 21
+
+          

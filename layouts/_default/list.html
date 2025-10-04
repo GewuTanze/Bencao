@@ -1,0 +1,185 @@
+{{- define "main" }}
+
+{{- if (and site.Params.profileMode.enabled .IsHome) }}
+{{- partial "index_profile.html" . }}
+{{- else }} {{/* if not profileMode */}}
+
+{{- if not .IsHome | and .Title }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{ .Title }}
+    {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $pages := union .RegularPages .Sections }}
+
+{{- if .IsHome }}
+{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- end }}
+
+{{- $paginator := .Paginate $pages }}
+
+{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{- $term := .Data.Term }}
+{{- range $index, $page := $paginator.Pages }}
+
+{{- $class := "post-entry" }}
+
+{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
+{{- $class = "first-entry" }}
+{{- else if $term }}
+{{- $class = "post-entry tag-entry" }}
+{{- end }}
+
+<article class="{{ $class }}">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      {{- .Title }}
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h2>
+  </header>
+  {{- if (ne (.Param "hideSummary") true) }}
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
+  {{- end }}
+  {{- if not (.Param "hideMeta") }}
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" . -}}
+  </footer>
+  {{- end }}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}  
+<footer class="page-footer">
+  <nav class="pagination">
+    <!-- 小屏幕导航按钮容器 -->
+    <div class="pagination-nav-container-mobile">
+      <div class="pagination-left-mobile">
+        {{- if $paginator.HasPrev }}
+        <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+          «&nbsp;{{ i18n "prev_page" }}
+        </a>
+        {{- else }}
+        <!-- 占位元素保持布局 -->
+        <div class="pagination-placeholder-mobile"></div>
+        {{- end }}
+      </div>
+      
+      <div class="pagination-right-mobile">
+        {{- if $paginator.HasNext }}
+        <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+          {{ i18n "next_page" }}&nbsp;»
+        </a>
+        {{- else }}
+        <!-- 占位元素保持布局 -->
+        <div class="pagination-placeholder-mobile"></div>
+        {{- end }}
+      </div>
+    </div>
+    
+    <!-- 大屏幕分页布局 -->
+    <div class="pagination-left">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+        «&nbsp;{{ i18n "prev_page" }}&nbsp;
+      </a>
+      {{- else }}
+      <div class="pagination-placeholder"></div>
+      {{- end }}
+    </div>
+    
+    <!-- 页码按钮区域 -->
+    <div class="pagination-center">
+      {{- /* 计算显示范围 */}}
+      {{- $adjacent := 2 }}
+      {{- $lower := math.Max 1 (sub $paginator.PageNumber $adjacent) }}
+      {{- $upper := math.Min $paginator.TotalPages (add $paginator.PageNumber $adjacent) }}
+      
+      {{- /* 显示起始页和省略号 */}}
+      {{- if gt $lower 1 }}
+        <a href="{{ (index $paginator.Pagers 0).URL | absURL }}" class="page-number">1</a>
+        {{- if gt $lower 2 }}
+          <span class="page-number">...</span>
+        {{- end }}
+      {{- end }}
+      
+      {{- /* 显示当前页周围的页码 */}}
+      {{- range $paginator.Pagers }}
+        {{- if and (ge .PageNumber $lower) (le .PageNumber $upper) }}
+          {{- if eq . $paginator }}
+            <span class="page-number current">{{ .PageNumber }}</span>
+          {{- else }}
+            <a href="{{ .URL | absURL }}" class="page-number">{{ .PageNumber }}</a>
+          {{- end }}
+        {{- end }}
+      {{- end }}
+      
+      {{- /* 显示末尾页和省略号 */}}
+      {{- if lt $upper $paginator.TotalPages }}
+        {{- if lt $upper (sub $paginator.TotalPages 1) }}
+          <span class="page-number">...</span>
+        {{- end }}
+        <a href="{{ (index $paginator.Pagers (sub $paginator.TotalPages 1)).URL | absURL }}" class="page-number">{{ $paginator.TotalPages }}</a>
+      {{- end }}
+    </div>
+    
+    <div class="pagination-right">
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+        {{ i18n "next_page" }}&nbsp;»
+      </a>
+      {{- else }}
+      <div class="pagination-placeholder"></div>
+      {{- end }}
+    </div>
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}{{/* end profileMode */}}
+
+{{- end }}{{- /* end main */ -}}
