@@ -1,9 +1,9 @@
 +++
-title = '麻黄'
+title = '麻黃'
 date = 2024-08-06T22:39:48+08:00
 draft =false
-categories = ["中药","中国药典"]
-tags = ["解表药", "风寒", "中国药典"]
+categories = ["中藥","中國藥典"]
+tags = ["解表藥", "風寒", "中國藥典"]
 math = true
 weight = 10 # 权重
 +++

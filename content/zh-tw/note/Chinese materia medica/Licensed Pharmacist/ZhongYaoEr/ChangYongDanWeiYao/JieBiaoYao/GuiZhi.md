@@ -2,9 +2,9 @@
 title = '桂枝'
 date = 2025-08-06T22:39:48+08:00
 draft =false
-categories = ["中药"]
-tags = ["解表药", "风寒"]
-keywords = ["中国药典"]
+categories = ["中藥"]
+tags = ["解表藥", "風寒"]
+keywords = ["中國藥典"]
 math = true
 weight = 20 # 权重
 +++

@@ -1,9 +1,9 @@
 +++
-title = '测试组件文章'
+title = '測試組件文章'
 date = 2025-08-06T22:39:48+08:00
 draft =false
-categories = ["通用技术"]
-tags = ["博客搭建", "Bilibili"]
+categories = ["通用技術"]
+tags = ["測試", "Bilibili"]
 math = true
 +++
 ## 正文宽度
