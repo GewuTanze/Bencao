@@ -1,7 +1,7 @@
 # ~~~~~~~
 # hugo 本身的配置
 # ~~~~~~~
-baseURL: "https://Bencao.github.io/Bencao/" # 主站的 URL,绑定的域名
+baseURL: "https://gewutanze.com/" # 主站的 URL,绑定的域名
 title: GEWUTANZE BENCAO # 站点标题
 copyright: "Copyright © 2025 GewuTanze. 格物致知,探赜索隐." # 网站的版权声明，通常显示在页脚
 theme: PaperMod # 主题
